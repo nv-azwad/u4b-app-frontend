@@ -264,23 +264,24 @@ export default function AdminDashboard() {
             </div>
 
             {/* User Engagement */}
-            <div>
-              <div className="flex items-center justify-between mb-1">
-                <p className="text-sm text-gray-600">Active Users (with donations)</p>
-                <p className="text-sm font-semibold text-gray-800">
-                  {stats.totalUsers > 0 && stats.totalDonations > 0 
-                    ? Math.round((stats.totalDonations / stats.totalUsers) * 100) 
-                    : 0
-                  }%
-                </p>
-              </div>
-              <div className="w-full bg-gray-200 rounded-full h-2">
-                <div 
-                  className="bg-blue-500 h-2 rounded-full transition-all"
-                  style={{ 
-                    width: `${stats.totalUsers > 0 && stats.totalDonations > 0 
-                      ? Math.round((stats.totalDonations / stats.totalUsers) * 100) 
-                      : 0
+<div>
+  <div className="flex items-center justify-between mb-1">
+    <p className="text-sm text-gray-600">Active Users (with donations)</p>
+    <p className="text-sm font-semibold text-gray-800">
+      {stats.totalUsers > 0 && stats.totalDonations > 0 
+        ? Math.min(100, Math.round((stats.totalDonations / stats.totalUsers) * 100))
+        : 0
+      }%
+    </p>
+  </div>
+  <div className="w-full bg-gray-200 rounded-full h-2">
+    <div 
+      className="bg-blue-500 h-2 rounded-full transition-all"
+      style={{ 
+        width: `${stats.totalUsers > 0 && stats.totalDonations > 0 
+          ? Math.min(100, Math.round((stats.totalDonations / stats.totalUsers) * 100))
+          : 0
+
                     }%` 
                   }}
                 ></div>

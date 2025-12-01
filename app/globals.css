@@ -164,3 +164,24 @@ body {
 .animate-slide-in {
   animation: slide-in 0.3s ease-out;
 }
+
+/* Fix body scroll and background */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #dbeafe, #dcfce7) !important;
+}
+
+/* Prevent over-scrolling on all pages */
+body {
+  position: relative;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Fix for admin pages specifically */
+body:has([class*="admin"]) {
+  background: linear-gradient(to bottom right, #dbeafe, #dcfce7) !important;
+}

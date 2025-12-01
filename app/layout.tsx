@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import PageTransition from "@/components/PageTransition";
-import Navigation from "@/components/Navigation"; // Add this
+import Navigation from "@/components/Navigation";
+import AdminNav from "@/components/AdminNav";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,9 +29,11 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        style={{ overflow: 'auto', height: '100vh' }}
       >
         <PageTransition>{children}</PageTransition>
-        <Navigation /> {/* Add this line */}
+        <Navigation />
+        <AdminNav />
       </body>
     </html>
   );
