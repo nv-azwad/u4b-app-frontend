@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname, useRouter } from 'next/navigation';
-import { Home, Clock, Package, Users, LogOut } from 'lucide-react';
+import { Home, Clock, Package, Users, LogOut, Settings } from 'lucide-react';
 import { removeToken } from '@/lib/auth';
 
 export default function AdminNav() {
@@ -40,14 +40,20 @@ export default function AdminNav() {
       name: 'Users',
       path: '/admin/users',
       icon: Users
-    }
+    },
+    {
+    name: 'Settings',
+    path: '/admin/settings',
+    icon: Settings
+  }
+
   ];
 
   return (
     <>
       {/* Bottom Navigation */}
       <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50">
-        <div className="grid grid-cols-5 h-16">
+        <div className="grid grid-cols-6 h-16">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = pathname === item.path;

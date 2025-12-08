@@ -167,6 +167,15 @@ export default function ProfilePage() {
             ✏️ Edit Profile
           </button>
 
+
+          {/* Change Password Button */}
+          <button
+            onClick={() => router.push('/profile/change-password')}
+            className="w-full bg-[#417FA2] hover:bg-[#356A85] text-white py-3 px-6 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 mb-3"
+          >
+            🔐 Change Password
+          </button>
+
           {/* Logout */}
           <button
             onClick={handleLogout}

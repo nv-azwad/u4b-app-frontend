@@ -36,6 +36,11 @@ export default function LoginPage() {
       return;
     }
 
+    if (!formData.password) {
+      showError('Please enter your password');
+      return;
+    }
+
     if (!isLogin && !formData.name) {
       showError('Please enter your name');
       return;
@@ -49,20 +54,18 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      const endpoint = isLogin ? '/auth/login' : '/auth/signup';
+      const endpoint = isLogin ? '/auth/login' : '/auth/register';
       
       const payload = isLogin 
         ? {
             email: formData.email,
-            authId: formData.email,
-            authProvider: 'email'
+            password: formData.password
           }
         : {
             email: formData.email,
             name: formData.name,
             phone: formData.phone,
-            authId: formData.email,
-            authProvider: 'email'
+            password: formData.password
           };
 
       const response = await fetch(`${API_URL}${endpoint}`, {
@@ -75,19 +78,19 @@ export default function LoginPage() {
 
       const data = await response.json();
 
-      if (!response.ok) {
+      if (!data.success) {
         throw new Error(data.message || 'Authentication failed');
       }
 
       // Save token
-      setToken(data.data.token);
+      setToken(data.token);
 
       // Show success message
       showSuccess(isLogin ? 'Login successful!' : 'Account created successfully!');
 
       // Redirect based on user role
       setTimeout(() => {
-        if (data.data.user.is_admin) {
+        if (data.user.is_admin) {
           router.push('/admin');
         } else {
           router.push('/dashboard');

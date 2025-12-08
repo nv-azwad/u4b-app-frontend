@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Shield, Users, Package, Clock, CheckCircle, TrendingUp, Award } from 'lucide-react';
+import { Shield, Users, Package, Clock, CheckCircle, TrendingUp, Award, Settings } from 'lucide-react';
 import { API_URL, fetchWithAuth, getUserFromToken } from '@/lib/auth';
+
 
 interface Stats {
   totalDonations: number;
@@ -11,6 +12,7 @@ interface Stats {
   approvedToday: number;
   totalUsers: number;
   totalVouchers: number;
+  activeUsers: number;
 }
 
 export default function AdminDashboard() {
@@ -21,7 +23,8 @@ export default function AdminDashboard() {
     pendingReview: 0,
     approvedToday: 0,
     totalUsers: 0,
-    totalVouchers: 0
+    totalVouchers: 0,
+    activeUsers: 0
   });
 
   useEffect(() => {
@@ -67,12 +70,21 @@ export default function AdminDashboard() {
       
       {/* Header */}
       <div className="bg-[#417FA2] pt-12 pb-6 px-6 rounded-b-3xl shadow-lg mb-6">
-        <div className="flex items-center gap-3 mb-2">
-          <Shield size={32} className="text-white" />
-          <h1 className="text-white text-2xl font-bold">Admin Dashboard</h1>
-        </div>
-        <p className="text-white/80 text-sm">Platform overview and statistics</p>
-      </div>
+  <div className="flex items-center justify-between mb-2">
+    <div className="flex items-center gap-3">
+      <Shield size={32} className="text-white" />
+      <h1 className="text-white text-2xl font-bold">Admin Dashboard</h1>
+    </div>
+    <button
+      onClick={() => router.push('/admin/settings')}
+      className="bg-white/20 hover:bg-white/30 text-white p-2 rounded-lg transition-all"
+      title="Settings"
+    >
+      <Settings size={20} />
+    </button>
+  </div>
+  <p className="text-white/80 text-sm">Platform overview and statistics</p>
+</div>
 
       <div className="px-6">
         
@@ -263,13 +275,13 @@ export default function AdminDashboard() {
               </div>
             </div>
 
-            {/* User Engagement */}
+           {/* User Engagement */}
 <div>
   <div className="flex items-center justify-between mb-1">
     <p className="text-sm text-gray-600">Active Users (with donations)</p>
     <p className="text-sm font-semibold text-gray-800">
-      {stats.totalUsers > 0 && stats.totalDonations > 0 
-        ? Math.min(100, Math.round((stats.totalDonations / stats.totalUsers) * 100))
+      {stats.totalUsers > 0 
+        ? Math.round((stats.activeUsers / stats.totalUsers) * 100)
         : 0
       }%
     </p>
@@ -278,8 +290,8 @@ export default function AdminDashboard() {
     <div 
       className="bg-blue-500 h-2 rounded-full transition-all"
       style={{ 
-        width: `${stats.totalUsers > 0 && stats.totalDonations > 0 
-          ? Math.min(100, Math.round((stats.totalDonations / stats.totalUsers) * 100))
+        width: `${stats.totalUsers > 0 
+          ? Math.round((stats.activeUsers / stats.totalUsers) * 100)
           : 0
 
                     }%` 
