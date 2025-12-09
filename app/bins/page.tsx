@@ -154,9 +154,9 @@ export default function BinsPage() {
               placeholder="Search by location, bin code, or address..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-4 py-3 pl-12 bg-white rounded-xl shadow-md text-sm focus:outline-none focus:ring-2 focus:ring-[#417FA2] transition-all"
+              className="w-full px-4 py-3 pl-12 bg-white rounded-xl shadow-md text-sm text-gray-800 placeholder:text-gray-600 focus:outline-none focus:ring-2 focus:ring-[#417FA2] transition-all"
             />
-            <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+            <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-700" size={20} />
           </div>
         </div>
 
